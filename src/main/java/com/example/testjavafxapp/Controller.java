@@ -1,5 +1,7 @@
 package com.example.testjavafxapp;
 
+import com.example.testjavafxapp.models.Container;
+import com.example.testjavafxapp.models.ProxyShapeContainer;
 import com.example.testjavafxapp.models.ShapeContainer;
 import com.example.testjavafxapp.models.shapes.ShapeFactory;
 import com.example.testjavafxapp.models.shapes.ShapeFactoryImpl;
@@ -15,12 +17,18 @@ import javafx.scene.shape.Shape;
 
 
 public class Controller {
+    @FXML
+    private Pane paintField;
+    @FXML
+    private CheckBox command;
+    Container shapeContainer;
 
     @FXML
-    Pane paintField;
-    @FXML
-    CheckBox command;
-    ShapeContainer shapeContainer = new ShapeContainer();
+    public void initialize(){
+        shapeContainer = new ProxyShapeContainer(paintField);
+
+    }
+
     public void paintFieldMouseClick(MouseEvent event){
         Shape shape = shapeContainer.addOrSelect(new Point2D(event.getX(), event.getY()), ShapeTypes.CIRCLE);
         if(shape != null){
@@ -31,6 +39,8 @@ public class Controller {
     public void formButtonDown(KeyEvent event){
         if(event.getCode().equals(KeyCode.COMMAND)){
             command.setSelected(true);
+        } else if (event.getCode().equals(KeyCode.BACK_SPACE)) {
+            shapeContainer.deleteAllActiveShapes();
         }
     }
 

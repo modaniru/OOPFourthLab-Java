@@ -62,4 +62,9 @@ public class CCircle implements Shape {
         }
         return false;
     }
+
+    @Override
+    public boolean isActive() {
+        return isActive;
+    }
 }
