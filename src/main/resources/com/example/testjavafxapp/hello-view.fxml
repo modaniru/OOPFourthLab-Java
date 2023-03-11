@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#formButtonDown" onKeyReleased="#formButtonUp" prefHeight="488.0" prefWidth="729.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testjavafxapp.Controller">
+   <children>
+      <Pane fx:id="paintField" layoutX="14.0" layoutY="11.0" onMouseClicked="#paintFieldMouseClick" prefHeight="378.0" prefWidth="466.0" style="-fx-background-color: 000; -fx-border-color: 000; -fx-border-width: 1; -fx-border-style: solid;" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="12.0" />
+      <CheckBox fx:id="command" layoutX="608.0" layoutY="14.0" mnemonicParsing="false" text="command" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
+      <CheckBox layoutX="596.0" layoutY="40.0" mnemonicParsing="false" prefWidth="54.0" text="many" AnchorPane.rightAnchor="38.0" AnchorPane.topAnchor="40.0" />
+   </children>
+</AnchorPane>
