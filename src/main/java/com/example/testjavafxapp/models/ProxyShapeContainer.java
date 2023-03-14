@@ -2,31 +2,56 @@ package com.example.testjavafxapp.models;
 
 import com.example.testjavafxapp.models.shapes.ShapeTypes;
 import javafx.geometry.Point2D;
-import javafx.scene.layout.Pane;
-import javafx.scene.shape.Shape;
+import javafx.scene.canvas.Canvas;
 
-import java.util.List;
-import java.util.stream.Collectors;
 
-public class ProxyShapeContainer implements Container{
-    private Container container = new ShapeContainer();
-    private final Pane paintField;
+public class ProxyShapeContainer extends Container{
+    private Container container;
 
-    public ProxyShapeContainer(Pane paintField){
-        container = new ShapeContainer();
-        this.paintField = paintField;
+    public ProxyShapeContainer(Canvas canvas){
+        super(canvas);
+        container = new ShapeContainer(canvas);
     }
 
     @Override
-    public Shape addOrSelect(Point2D point2D, ShapeTypes types) {
-        return container.addOrSelect(point2D, types);
+    public void addOrSelect(Point2D point2D, ShapeTypes types) {
+        container.addOrSelect(point2D, types);
+        drawAll();
     }
 
     @Override
-    public List<com.example.testjavafxapp.models.shapes.Shape> deleteAllActiveShapes() {
-        List<com.example.testjavafxapp.models.shapes.Shape> removed = container.deleteAllActiveShapes();
-        paintField.getChildren()
-                .removeAll(removed.stream().map(com.example.testjavafxapp.models.shapes.Shape::getInstance).toList());
+    public int deleteAllActiveShapes() {
+        int removed = container.deleteAllActiveShapes();
+        drawAll();
         return removed;
+    }
+
+    @Override
+    public void drawAll() {
+        clearCanvas();
+        container.drawAll();
+    }
+
+    @Override
+    public void changeSelectType() {
+        super.changeSelectType();
+        container.changeSelectType();
+    }
+
+    @Override
+    public void changeManySelectionType() {
+        super.changeManySelectionType();
+        container.changeManySelectionType();
+    }
+
+    @Override
+    public int deleteAll() {
+        int res = container.deleteAll();
+        drawAll();
+        return res;
+    }
+
+    private void clearCanvas(){
+        canvas.getGraphicsContext2D().clearRect(0,0,canvas.getWidth(),canvas.getHeight());
     }
 }

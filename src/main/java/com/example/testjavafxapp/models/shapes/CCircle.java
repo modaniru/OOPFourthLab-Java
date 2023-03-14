@@ -1,7 +1,9 @@
 package com.example.testjavafxapp.models.shapes;
 
 import javafx.geometry.Point2D;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
 public class CCircle implements Shape {
@@ -9,7 +11,7 @@ public class CCircle implements Shape {
     private boolean isActive;
     private final javafx.scene.shape.Shape instance;
 
-    private final int radius = 20;
+    private final int radius = 30;
 
     public CCircle(Point2D position) {
         this.position = position;
@@ -33,6 +35,14 @@ public class CCircle implements Shape {
             instance.setStroke(Color.BLUE);
         }else {
             instance.setStroke(Color.BLACK);
+        }
+    }
+
+    private Paint getColor(){
+        if(isActive){
+            return Color.BLUE;
+        }else {
+            return Color.BLACK;
         }
     }
 
@@ -66,5 +76,12 @@ public class CCircle implements Shape {
     @Override
     public boolean isActive() {
         return isActive;
+    }
+
+    @Override
+    public void draw(GraphicsContext graphicsContext) {
+        graphicsContext.setStroke(getColor());
+        graphicsContext.setLineWidth(2);
+        graphicsContext.strokeOval(position.getX() - radius, position.getY() - radius, radius * 2, radius * 2);
     }
 }
