@@ -6,7 +6,7 @@ import javafx.scene.canvas.Canvas;
 
 
 public class ProxyShapeContainer extends Container{
-    private Container container;
+    private final Container container;
 
     public ProxyShapeContainer(Canvas canvas){
         super(canvas);

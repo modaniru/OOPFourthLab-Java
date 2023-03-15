@@ -8,19 +8,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShapeContainer extends Container {
-    private ShapeFactory factory = new ShapeFactoryImpl();
+    private ShapeFactory factory;
     private List<Shape> list = new ArrayList<>();
 
     public ShapeContainer(Canvas canvas) {
         super(canvas);
     }
 
-
     @Override
     public void addOrSelect(Point2D point2D, ShapeTypes types) {
+        if (selectAll(point2D)) {
+            return;
+        }
         if(!selectionType) unSelectAll();
-        if (selectAll(point2D)) return;
-        unSelectAll();
         Shape shape = factory.createShape(point2D, types);
         list.add(shape);
     }
